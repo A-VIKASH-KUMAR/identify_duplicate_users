@@ -1,0 +1,25 @@
+{
+  "name": "bite_speed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:start": "tsc&&node dist/index.js",
+    "start": "nodemon src/index.ts"
+  },
+  "keywords": [],
+  "author": "vikash",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/pg": "^8.11.0",
+    "ts-node": "^10.9.2",
+    "nodemon": "^3.0.3",
+    "typescript": "^5.3.3"
+  }
+}
