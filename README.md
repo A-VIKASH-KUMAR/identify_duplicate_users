@@ -33,6 +33,7 @@ To hit the identity service locally, send a POST request with the following JSON
 - To hit the identity service deployed on Render.com, send a POST request with the same JSON body to the endpoint
 - `https://identify-duplicate-users-bs.onrender.com/api/identify`
 - You can use some tools like curl or Postman to send HTTP POST request to the remote endpoint.
+- Import identity.postman_collection.json file for the endpoint collection 
 **Request Body**
 
 ```json
