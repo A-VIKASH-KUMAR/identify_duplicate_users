@@ -13,7 +13,7 @@
 }
 
 ## To Run the remote endpoint deployed on render.com
--  To hit the identity service remote url deployed on render.com send a POST request with the following endpoint to https://identify-duplicate-users-bs.onrender.com/api/identify
+-  To hit the identity service remote url deployed on render.com send a POST request with the following body to endpoint https://identify-duplicate-users-bs.onrender.com/api/identify
 **Request Body**
 
 {
