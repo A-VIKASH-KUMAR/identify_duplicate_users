@@ -20,23 +20,6 @@ export const identify = async (req: any, res: any) => {
     let contacts: Array<Contact>;
     if (email || phoneNumber) {
       contacts = await identifyContact(email, phoneNumber);
-      // If both email and phone number match
-      if (
-        email === contacts[0].email &&
-        phoneNumber === contacts[0].phone_number
-      ) {
-        const secondaryContactIds = await getSecondaryContactIds(
-          contacts[0].id
-        );
-        return res.status(200).json({
-          contact: {
-            primaryContactId: contacts[0].id,
-            emails: [contacts[0].email],
-            phoneNumbers: [contacts[0].phone_number],
-            secondaryContactIds,
-          },
-        });
-      }
       if (contacts.length === 0) {
         const id = random(10000, 20000);
         const createContact = await createNewContact(
@@ -58,6 +41,23 @@ export const identify = async (req: any, res: any) => {
         .json({ error: "Email or phoneNumber is required." });
     }
     if (contacts && contacts.length > 0) {
+       // If both email and phone number match
+       if ( 
+        email === contacts[0].email &&
+        phoneNumber === contacts[0].phone_number
+      ) {
+        const secondaryContactIds = await getSecondaryContactIds(
+          contacts[0].id
+        );
+        return res.status(200).json({
+          contact: {
+            primaryContactId: contacts[0].id,
+            emails: [contacts[0].email],
+            phoneNumbers: [contacts[0].phone_number],
+            secondaryContactIds,
+          },
+        });
+      }
       const emails = contacts.map((contact) => contact.email);
       const phoneNumbers = contacts.map((contact) => contact.phone_number);
       const ids = contacts.map((contact) => contact.id);
