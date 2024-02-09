@@ -18,8 +18,9 @@ export const identify = async (req: any, res: any) => {
   try {
     const { email, phoneNumber } = req.body;
     let contacts: Array<Contact>;
+    contacts = await identifyContact(email, phoneNumber);
     if (email || phoneNumber) {
-      contacts = await identifyContact(email, phoneNumber);
+      
       if (contacts.length === 0) {
         const id = random(10000, 20000);
         const createContact = await createNewContact(
@@ -29,11 +30,20 @@ export const identify = async (req: any, res: any) => {
           null,
           "primary"
         );
+        
         if (!createContact) {
           return res
             .status(500)
             .json({ message: "unable to create contact please try later" });
         }
+        return res.status(200).json({
+          contact: {
+            primaryContactId: createContact.id,
+            emails: [createContact.email],
+            phoneNumbers: [createContact.phone_number],
+            secondaryContactIds:[],
+          },
+        });
       }
     } else {
       return res
