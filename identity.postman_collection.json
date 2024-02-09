@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "a5ad8f7c-877f-416a-9ab8-2da15482e884",
+		"name": "identity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31454101"
+	},
+	"item": [
+		{
+			"name": "identity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"email\":\"vikash1@gmail.com\",\n \"phoneNumber\":\"456245\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://identify-duplicate-users-bs.onrender.com/api/identify",
+					"protocol": "https",
+					"host": [
+						"identify-duplicate-users-bs",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"identify"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "identity remote url",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"email\":\"vikash1@gmail.com\",\n \"phoneNumber\":\"456245\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://identify-duplicate-users-bs.onrender.com/api/identify",
+							"protocol": "https",
+							"host": [
+								"identify-duplicate-users-bs",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"identify"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 09 Feb 2024 16:28:19 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "852d7c18cf981bd2-BOM"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"78-a2pTHYQU3dDIko535A/US5k7ADA\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "f961ce0c-7a24-49cc"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"contact\": {\n        \"primaryContactId\": 14696,\n        \"emails\": [\n            \"vikash1@gmail.com\"\n        ],\n        \"phoneNumbers\": [\n            \"456245\"\n        ],\n        \"secondaryContactIds\": []\n    }\n}"
+				},
+				{
+					"name": "identity url local",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"email\":\"vikash1@gmail.com\",\n \"phoneNumber\":\"456245\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001api/identify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001api",
+							"path": [
+								"identify"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 09 Feb 2024 16:28:19 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-Ray",
+							"value": "852d7c18cf981bd2-BOM"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"78-a2pTHYQU3dDIko535A/US5k7ADA\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "rndr-id",
+							"value": "f961ce0c-7a24-49cc"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Render"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"contact\": {\n        \"primaryContactId\": 14696,\n        \"emails\": [\n            \"vikash1@gmail.com\"\n        ],\n        \"phoneNumbers\": [\n            \"456245\"\n        ],\n        \"secondaryContactIds\": []\n    }\n}"
+				}
+			]
+		}
+	]
+}
