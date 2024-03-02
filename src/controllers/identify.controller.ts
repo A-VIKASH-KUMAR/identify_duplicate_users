@@ -20,8 +20,6 @@ export const identify = async (req: any, res: any) => {
 
     if (email || phoneNumber) {
       if (contacts.length === 0) {
-        console.log("inside here", contacts);
-
         const id = random(10000, 20000);
         const createContact = await createNewContact(
           id,
@@ -76,10 +74,10 @@ export const identify = async (req: any, res: any) => {
         // If a matching contact is found but with different information, create a secondary contact
         if (
           (email && emails.length > 1 && email !== emails[i]) ||
-          (phoneNumber && phoneNumbers.length > 1 && phoneNumber !== phoneNumbers[i])
+          (phoneNumber &&
+            phoneNumbers.length > 1 &&
+            phoneNumber !== phoneNumbers[i])
         ) {
-          console.log("inside not equal", email);
-
           const id = random(10000, 20000);
           await createNewContact(id, email, phoneNumber, ids[0], "secondary");
         }
