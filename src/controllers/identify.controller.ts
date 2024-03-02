@@ -1,5 +1,3 @@
-import { pgClient } from "../db";
-import { Client } from "pg";
 import {
   identifyContact,
   getSecondaryContactIds,
@@ -19,9 +17,11 @@ export const identify = async (req: any, res: any) => {
     const { email, phoneNumber } = req.body;
     let contacts: Array<Contact>;
     contacts = await identifyContact(email, phoneNumber);
+
     if (email || phoneNumber) {
-      
       if (contacts.length === 0) {
+        console.log("inside here", contacts);
+
         const id = random(10000, 20000);
         const createContact = await createNewContact(
           id,
@@ -30,7 +30,7 @@ export const identify = async (req: any, res: any) => {
           null,
           "primary"
         );
-        
+
         if (!createContact) {
           return res
             .status(500)
@@ -41,7 +41,7 @@ export const identify = async (req: any, res: any) => {
             primaryContactId: createContact.id,
             emails: [createContact.email],
             phoneNumbers: [createContact.phone_number],
-            secondaryContactIds:[],
+            secondaryContactIds: [],
           },
         });
       }
@@ -51,14 +51,15 @@ export const identify = async (req: any, res: any) => {
         .json({ error: "Email or phoneNumber is required." });
     }
     if (contacts && contacts.length > 0) {
-       // If both email and phone number match
-       if ( 
+      // If both email and phone number match
+      if (
         email === contacts[0].email &&
         phoneNumber === contacts[0].phone_number
       ) {
         const secondaryContactIds = await getSecondaryContactIds(
           contacts[0].id
         );
+
         return res.status(200).json({
           contact: {
             primaryContactId: contacts[0].id,
@@ -71,14 +72,14 @@ export const identify = async (req: any, res: any) => {
       const emails = contacts.map((contact) => contact.email);
       const phoneNumbers = contacts.map((contact) => contact.phone_number);
       const ids = contacts.map((contact) => contact.id);
-      for (let i = 1; i < contacts.length; i++) {
+      for (let i = 0; i < contacts.length; i++) {
         // If a matching contact is found but with different information, create a secondary contact
         if (
           (email && emails.length > 1 && email !== emails[i]) ||
-          (phoneNumber &&
-            phoneNumbers.length > 1 &&
-            phoneNumber !== phoneNumbers[i])
+          (phoneNumber && phoneNumbers.length > 1 && phoneNumber !== phoneNumbers[i])
         ) {
+          console.log("inside not equal", email);
+
           const id = random(10000, 20000);
           await createNewContact(id, email, phoneNumber, ids[0], "secondary");
         }
