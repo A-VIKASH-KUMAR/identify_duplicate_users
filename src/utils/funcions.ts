@@ -56,10 +56,12 @@ export const updateContactPrecedence = async (
 export const identifyContact = async (email: string, phoneNumber: string) => {
   try {
     const query = `
-        SELECT id, email, phone_number
-        FROM contact
-        WHERE (email = $1 OR phone_number = $2)
-        ORDER BY created_at ASC
+    SELECT *
+    FROM contact
+    WHERE (CASE WHEN email is not null then email = $1 end) OR 
+	(CASE when phone_number is not null then phone_number  = $2 end)
+    ORDER BY created_at ASC
+	
       `;
     const values = [email, phoneNumber];
     const client = await pgClient();
