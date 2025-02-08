@@ -5,9 +5,9 @@ import {
   updateContactPrecedence,
   random,
 } from "../utils/funcions";
-
+import { v4 } from "uuid";
 type Contact = {
-  id: number;
+  id: string;
   email: string;
   phone_number: string;
   created_at: Date;
@@ -15,12 +15,14 @@ type Contact = {
 export const identify = async (req: any, res: any) => {
   try {
     const { email, phoneNumber } = req.body;
+
     let contacts: Array<Contact>;
     contacts = await identifyContact(email, phoneNumber);
+    console.log("contacts", contacts);
 
     if (email || phoneNumber) {
       if (contacts.length === 0) {
-        const id = random(10000, 20000);
+        const id = v4();
         const createContact = await createNewContact(
           id,
           email,
@@ -73,13 +75,13 @@ export const identify = async (req: any, res: any) => {
       for (let i = 0; i < contacts.length; i++) {
         // If a matching contact is found but with different information, create a secondary contact
         if (
-          (email && emails.length > 1 && email !== emails[i]) ||
+          (email && emails.length > 0 && email !== emails[i]) ||
           (phoneNumber &&
-            phoneNumbers.length > 1 &&
+            phoneNumbers.length > 0 &&
             phoneNumber !== phoneNumbers[i])
         ) {
-          const id = random(10000, 20000);
-          await createNewContact(id, email, phoneNumber, ids[0], "secondary");
+          const id = v4();
+          await createNewContact(id, email, phoneNumber, ids[i], "secondary");
         }
 
         if (

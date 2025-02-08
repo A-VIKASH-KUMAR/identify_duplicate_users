@@ -4,13 +4,12 @@ import { pgClient } from "../db";
 export function random(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min);
 }
-
 // Function to create a new contact
 export const createNewContact = async (
-  id: number,
+  id: string,
   email: string,
   phoneNumber: string,
-  linkedId:number | null,
+  linkedId:string | null,
   linkPrecedence:string
 ) => {
   try {
@@ -31,8 +30,8 @@ export const createNewContact = async (
 };
 
 export const updateContactPrecedence = async (
-  id: number,
-  linkedId:number,
+  id: string,
+  linkedId:string,
   link_precedence: string
 ) => {
   try {
@@ -60,21 +59,20 @@ export const identifyContact = async (email: string, phoneNumber: string) => {
     FROM contact
     WHERE (CASE WHEN email is not null then email = $1 end) OR 
 	(CASE when phone_number is not null then phone_number  = $2 end)
-    ORDER BY created_at ASC
-	
-      `;
+    ORDER BY created_at ASC;`;
     const values = [email, phoneNumber];
     const client = await pgClient();
     const { rows } = await client.query(query, values);
     await client.end();
     return rows;
   } catch (error) {
-    throw error;
+    console.error("error occoured in identifing contact", error);
+    return []
   }
 };
 
 // Function to get secondary contact IDs linked to a primary contact
-export const getSecondaryContactIds = async (primaryContactId: number) => {
+export const getSecondaryContactIds = async (primaryContactId: string) => {
   try {
     const query = `
         SELECT id
